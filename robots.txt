@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mmohitsingh05.github.io/CS-MINDSET-SYSTEM/sitemap.xml
+Sitemap: https://cs-movie.netlify.app/sitemap.xml
