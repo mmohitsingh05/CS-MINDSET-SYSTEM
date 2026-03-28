@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Civil Servant Mindset System — UPSC Cinema Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0A0A0F;
+  --paper: #F5F0E8;
+  --accent: #C84B31;
+  --gold: #E8A838;
+  --teal: #1A6B5A;
+  --slate: #2C3E50;
+  --mist: #8B9BA8;
+  --cream: #FAF7F2;
+  --border: #D4C9B8;
+  --card-bg: #FFFFFF;
+  --phase1: #C84B31;
+  --phase2: #1A6B5A;
+  --phase3: #2C3E50;
+  --phase4: #7B4F9E;
+}
+
+[data-theme="light"] {
+  --ink: #1A1A2E;
+  --paper: #FEFEFE;
+  --card-bg: #FFFFFF;
+  --border: #E0E0E0;
+  --cream: #F8F8F8;
+  --mist: #6B7280;
+}
+
+[data-theme="light"] .hero,
+[data-theme="light"] .nav,
+[data-theme="light"] .phase-strip,
+[data-theme="light"] .ink-divider,
+[data-theme="light"] .progress-banner {
+  filter: invert(0.95) hue-rotate(180deg);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 56px;
+  border-bottom: 2px solid var(--accent);
+}
+.nav-brand {
+  font-family: 'Space Mono', monospace;
+  color: var(--gold);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 4px; }
+.nav-link {
+  color: var(--mist);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+}
+.nav-link:hover, .nav-link.active { color: #fff; background: rgba(200,75,49,0.3); }
+.nav-link.active { color: var(--gold); }
+
+/* ── PAGES ── */
+.page { display: none; padding-top: 56px; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  min-height: calc(100vh - 56px);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 60px 32px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 59px,
+    rgba(200,75,49,0.08) 59px, rgba(200,75,49,0.08) 60px
+  ),
+  repeating-linear-gradient(
+    90deg, transparent, transparent 79px,
+    rgba(200,75,49,0.05) 79px, rgba(200,75,49,0.05) 80px
+  );
+}
+.hero-inner { position: relative; max-width: 900px; }
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--accent); }
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 7vw, 88px);
+  line-height: 1.0;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.hero-title em { color: var(--gold); font-style: italic; }
+.hero-sub {
+  font-size: 18px; color: var(--mist);
+  max-width: 600px; line-height: 1.6;
+  margin: 24px 0 40px;
+}
+.hero-stats {
+  display: flex; gap: 40px; flex-wrap: wrap;
+  padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.1);
+}
+.hero-stat-n { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold); }
+.hero-stat-l { font-size: 12px; color: var(--mist); margin-top: 2px; }
+.hero-cta {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  padding: 12px 28px; border: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: #E05535; transform: translateY(-1px); }
+.btn-outline {
+  background: transparent; color: var(--mist);
+  padding: 12px 28px; border: 1px solid rgba(255,255,255,0.2);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; cursor: pointer;
+  border-radius: 2px; transition: all 0.2s;
+}
+.btn-outline:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+/* ── SECTION ── */
+.section { padding: 72px 32px; max-width: 1200px; margin: 0 auto; }
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.15; margin-bottom: 16px;
+}
+.section-desc { font-size: 16px; color: #555; line-height: 1.7; max-width: 640px; }
+
+/* ── PHASE STRIP ── */
+.phase-strip {
+  background: var(--ink); padding: 48px 32px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+}
+.phase-block {
+  padding: 28px 24px; cursor: pointer;
+  transition: background 0.2s;
+  border-top: 3px solid transparent;
+}
+.phase-block:hover { background: rgba(255,255,255,0.04); }
+.phase-block.p1 { border-color: var(--phase1); }
+.phase-block.p2 { border-color: var(--phase2); }
+.phase-block.p3 { border-color: var(--phase3); }
+.phase-block.p4 { border-color: var(--phase4); }
+.phase-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: var(--mist);
+  letter-spacing: 0.1em; margin-bottom: 8px;
+}
+.phase-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; color: #fff;
+  margin-bottom: 6px;
+}
+.phase-weeks { font-size: 12px; color: var(--mist); }
+
+/* ── FILM CARDS ── */
+.films-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px; margin-top: 40px;
+}
+.film-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+  position: relative;
+}
+.film-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.film-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+.film-card:hover::before { transform: scaleX(1); }
+
+.film-thumb {
+  width: 100%; height: 180px; object-fit: cover;
+  display: block; background: var(--slate);
+  position: relative; overflow: hidden;
+}
+.film-thumb-img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block;
+}
+.film-thumb-fallback {
+  width: 100%; height: 180px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+}
+.film-thumb-title-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; color: #fff; text-align: center; padding: 0 16px;
+}
+.film-year-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: rgba(255,255,255,0.6);
+}
+.film-type-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px 0;
+}
+.type-pill {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px;
+}
+.type-film { background: #FEE9E4; color: var(--accent); }
+.type-doc  { background: #E4F4EF; color: var(--teal); }
+.type-series { background: #FDF4E4; color: #9A6200; }
+.mindset-pill {
+  font-size: 10px; padding: 3px 8px; border-radius: 2px;
+  border: 1px solid currentColor;
+}
+.m-executor { color: #9A6200; }
+.m-reformer { color: var(--teal); }
+.m-leader   { color: var(--slate); }
+.m-visionary { color: #7B4F9E; }
+
+.film-body { padding: 14px 16px 16px; }
+.film-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; margin-bottom: 4px; line-height: 1.2;
+}
+.film-tagline { font-size: 12px; color: #777; line-height: 1.5; margin-bottom: 14px; }
+.film-section { margin-bottom: 10px; }
+.film-section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mist); margin-bottom: 4px;
+}
+.film-section-text { font-size: 13px; color: #333; line-height: 1.6; }
+.film-warn { color: #B8341E; }
+.film-shift { color: #1A5A4A; font-style: italic; }
+.film-links { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.film-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 600;
+  padding: 6px 12px; border-radius: 2px;
+  text-decoration: none; transition: all 0.2s;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.05em;
+}
+.link-yt { background: #FF0000; color: #fff; }
+.link-yt:hover { background: #CC0000; }
+.link-wiki { background: var(--slate); color: #fff; }
+.link-wiki:hover { background: #1a2530; }
+.link-free { background: var(--teal); color: #fff; }
+.link-free:hover { background: #135045; }
+.link-icon { font-size: 13px; }
+
+/* ── PHASE FILTERS ── */
+.filter-bar {
+  display: flex; gap: 8px; flex-wrap: wrap; margin: 32px 0 0;
+}
+.filter-btn {
+  padding: 8px 18px; border: 2px solid var(--border);
+  background: transparent; cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #666; transition: all 0.2s; border-radius: 2px;
+}
+.filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+.filter-btn.active {
+  background: var(--ink); color: var(--gold); border-color: var(--ink);
+}
+
+/* ── WEEK PLAN ── */
+.week-timeline { margin-top: 40px; }
+.week-row {
+  display: grid; grid-template-columns: 80px 1fr;
+  gap: 0; border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.week-row:hover { background: rgba(200,75,49,0.03); }
+.week-num-col {
+  padding: 20px 16px;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  border-right: 2px solid var(--border); gap: 4px;
+}
+.week-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700; line-height: 1;
+}
+.week-label { font-size: 9px; color: var(--mist); letter-spacing: 0.1em; text-transform: uppercase; }
+.week-content { padding: 20px 24px; }
+.week-theme {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; margin-bottom: 6px;
+}
+.week-films-list { font-size: 12px; color: #555; margin-bottom: 10px; }
+.week-goal-text { font-size: 13px; color: #333; line-height: 1.65; }
+.week-reflect {
+  margin-top: 10px; padding: 10px 14px;
+  background: var(--cream); border-left: 3px solid var(--gold);
+  font-size: 12px; color: #555; line-height: 1.6; font-style: italic;
+}
+.week-expand-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 12px; color: var(--accent);
+  font-family: 'Space Mono', monospace;
+  margin-top: 8px; letter-spacing: 0.05em;
+  padding: 0;
+}
+
+/* ── MINDSET PAGE ── */
+.archetype-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2px; margin-top: 32px;
+  background: var(--border);
+}
+.archetype-card {
+  background: var(--card-bg);
+  padding: 28px 24px;
+}
+.arch-accent { width: 40px; height: 3px; margin-bottom: 16px; }
+.arch-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; margin-bottom: 10px;
+}
+.arch-desc { font-size: 13px; color: #555; line-height: 1.65; margin-bottom: 14px; }
+.arch-films { display: flex; flex-wrap: wrap; gap: 4px; }
+.arch-film-tag {
+  font-size: 10px; padding: 3px 8px;
+  border: 1px solid var(--border); color: #555;
+  font-family: 'Space Mono', monospace;
+}
+
+.trap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px; margin-top: 32px;
+}
+.trap-card {
+  padding: 20px 22px;
+  border: 1px solid #FCCDC7;
+  background: #FFF8F7;
+  border-left: 4px solid var(--accent);
+}
+.trap-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; color: var(--accent);
+  margin-bottom: 8px;
+}
+.trap-text { font-size: 13px; color: #555; line-height: 1.65; }
+
+/* ── ABOUT / GUIDE ── */
+.guide-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; margin-top: 32px;
+}
+.guide-card {
+  padding: 24px;
+  background: var(--card-bg); border: 1px solid var(--border);
+}
+.guide-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px; color: var(--accent); opacity: 0.2;
+  line-height: 1; margin-bottom: 4px;
+}
+.guide-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+.guide-text { font-size: 13px; color: #555; line-height: 1.65; }
+
+/* ── DIVIDER ── */
+.ink-divider {
+  background: var(--ink); padding: 40px 32px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 24px;
+}
+.ink-divider-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; color: var(--gold); text-align: center;
+  font-style: italic;
+}
+
+/* ── SCROLL ANIM ── */
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.5s, transform 0.5s; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .phase-strip { grid-template-columns: 1fr 1fr; }
+  .films-grid { grid-template-columns: 1fr; }
+  .week-row { grid-template-columns: 56px 1fr; }
+  .hero-title { font-size: 36px; }
+}
+
+/* ── MOBILE MENU ── */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--mist);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+}
+@media (max-width: 768px) {
+  .mobile-menu-btn { display: block; }
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  background: var(--ink);
+  border-bottom: 2px solid var(--accent);
+  z-index: 99;
+  padding: 16px;
+  flex-direction: column;
+  gap: 8px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu .nav-link {
+  text-align: left;
+  padding: 12px 16px;
+  border-radius: 4px;
+}
+
+/* ── WATCHLIST BUTTON ── */
+.watchlist-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: #FFD700;
+  font-size: 20px;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 2;
+}
+.watchlist-btn:hover { background: rgba(0,0,0,0.7); transform: scale(1.1); }
+.watchlist-btn.active { color: #FFD700; }
+
+/* ── NOTE BUTTON ── */
+.note-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--mist);
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+.note-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── NOTE MODAL ── */
+.note-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.note-modal-inner {
+  background: var(--card-bg);
+  padding: 24px;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 4px;
+}
+.note-modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+.note-textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  resize: vertical;
+  background: var(--paper);
+  color: var(--ink);
+}
+.note-textarea:focus { outline: none; border-color: var(--accent); }
+.note-modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+/* ── WEEK CHECKBOX ── */
+.week-check-btn {
+  background: none;
+  border: 2px solid var(--border);
+  color: var(--mist);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+.week-check-btn:hover { border-color: var(--accent); color: var(--accent); }
+.week-check-btn.checked { background: var(--teal); border-color: var(--teal); color: #fff; }
+.week-completed .week-row { background: rgba(26, 107, 90, 0.05); }
+.week-completed { background: rgba(26, 107, 90, 0.05); }
+
+/* ── GS4 BADGE ── */
+.gs4-badge {
+  display: inline-block;
+  font-size: 9px;
+  padding: 2px 6px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Space Mono', monospace;
+  border-radius: 2px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* ── WEEK ESSAY ── */
+.week-essay {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #2a2a4a 100%);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.6;
+  border-radius: 2px;
+  font-style: italic;
+}
+.week-essay strong { color: var(--gold); font-style: normal; }
+
+/* ── WEEK HEADER ── */
+.week-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── GS TAGS CLICKABLE ── */
+.gs-tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  background: #F0EDE8;
+  color: #555;
+  font-family: 'Space Mono', monospace;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.gs-tag:hover { background: var(--accent); color: #fff; }
+
+/* ── WATCHLIST PAGE ── */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+.empty-icon { font-size: 64px; color: var(--mist); margin-bottom: 16px; }
+.empty-state h3 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 8px; }
+.empty-state p { color: var(--mist); margin-bottom: 24px; }
+
+/* ── PROGRESS PAGE ── */
+.progress-dashboard { margin-top: 24px; }
+.progress-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.main-progress {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.progress-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) var(--percent), var(--border) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.progress-circle::before {
+  content: '';
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: var(--card-bg);
+  border-radius: 50%;
+}
+.progress-value {
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.progress-details h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; }
+.progress-details p { color: var(--mist); margin-bottom: 12px; }
+.progress-bar-wrap {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 300px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.5s;
+}
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 20px;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: var(--accent);
+}
+.stat-label { font-size: 12px; color: var(--mist); margin-top: 4px; }
+.reset-section { text-align: center; padding: 24px; }
+.reset-btn {
+  background: none;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-family: 'Space Mono', monospace;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.reset-btn:hover { background: #dc2626; color: #fff; }
+
+/* ── ESSAY PAGE ── */
+.essay-list {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0;
+}
+.essay-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 4px solid var(--accent);
+}
+.essay-card:hover { transform: translateX(4px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.essay-week { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 4px; }
+.essay-theme { font-size: 14px; color: var(--mist); margin-bottom: 8px; }
+.essay-question { font-size: 15px; line-height: 1.6; font-style: italic; }
+.essay-guide {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 24px;
+  margin-top: 32px;
+}
+.essay-guide h3 { font-family: 'Playfair Display', serif; margin-bottom: 16px; }
+.essay-guide ul { padding-left: 20px; }
+.essay-guide li { margin-bottom: 8px; font-size: 14px; line-height: 1.6; color: #555; }
+
+/* ── THEME TOGGLE ── */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--mist);
+  padding: 6px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── ADVANCED FILTERS ── */
+.advanced-filters {
+  display: none;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+}
+.advanced-filters.show { display: flex; }
+.filter-section { min-width: 140px; }
+.filter-section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--mist);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.mindset-filter-btn,
+.gs-filter-btn,
+.sort-btn {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  margin-bottom: 4px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: #666;
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.mindset-filter-btn:hover,
+.gs-filter-btn:hover,
+.sort-btn:hover { border-color: var(--accent); color: var(--accent); }
+.mindset-filter-btn.active,
+.gs-filter-btn.active,
+.sort-btn.active { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+
+/* ── WATCHLISTED CARD ── */
+.film-card.watchlisted { border-color: var(--gold); }
+.film-card.watchlisted::after {
+  content: '★';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  color: var(--gold);
+  font-size: 16px;
+  z-index: 2;
+}
+
+/* ── SAVED NOTE ── */
+.saved-note {
+  background: rgba(232, 168, 56, 0.1);
+  padding: 8px;
+  border-radius: 2px;
+  margin-top: 8px;
+}
+
+/* ── FILTER RESULT COUNT ── */
+.filter-count {
+  font-size: 12px;
+  color: var(--mist);
+  margin-left: 8px;
+}
+
+/* ── WATCHLIST NAV BADGE ── */
+.watchlist-badge {
+  display: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 4px;
+}
+
+/* ── SEARCH BAR ── */
+.search-wrap {
+  margin: 32px 0 0; position: relative;
+}
+.search-input {
+  width: 100%; max-width: 480px;
+  padding: 12px 16px 12px 44px;
+  border: 2px solid var(--border); border-radius: 2px;
+  font-size: 14px; font-family: 'Outfit', sans-serif;
+  background: var(--card-bg); color: var(--ink);
+  outline: none; transition: border-color 0.2s;
+}
+.search-input:focus { border-color: var(--accent); }
+.search-icon {
+  position: absolute; left: 14px; top: 50%;
+  transform: translateY(-50%); color: var(--mist); font-size: 16px;
+}
+.no-results {
+  display: none; padding: 40px; text-align: center;
+  color: var(--mist); font-size: 14px;
+}
+
+/* ── PHASE COLOR BARS ── */
+.p1-bar { border-top: 3px solid var(--phase1) !important; }
+.p2-bar { border-top: 3px solid var(--phase2) !important; }
+.p3-bar { border-top: 3px solid var(--phase3) !important; }
+.p4-bar { border-top: 3px solid var(--phase4) !important; }
+
+/* ── PROGRESS ── */
+.progress-banner {
+  background: linear-gradient(135deg, var(--ink) 0%, #1a1a2e 100%);
+  padding: 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.progress-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; color: #fff;
+}
+.progress-sub { font-size: 13px; color: var(--mist); margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-brand" href="#" onclick="showPage('home')">◈ CS MINDSET SYSTEM</a>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('home')">Home</button>
+    <button class="nav-link" onclick="showPage('films')">Films</button>
+    <button class="nav-link" onclick="showPage('plan')">12-Week Plan</button>
+    <button class="nav-link" onclick="showPage('mindset')">Mindset Map</button>
+    <button class="nav-link" onclick="showPage('watchlist')">Watchlist<span class="watchlist-badge" id="watchlistBadge">0</span></button>
+    <button class="nav-link" onclick="showPage('progress')">Progress</button>
+    <button class="nav-link" onclick="showPage('essay')">GS4 Essays</button>
+    <button class="nav-link" onclick="showPage('guide')">Guide</button>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">☽</button>
+  </div>
+  <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="nav-link active" onclick="showPage('home')">Home</button>
+  <button class="nav-link" onclick="showPage('films')">Films</button>
+  <button class="nav-link" onclick="showPage('plan')">12-Week Plan</button>
+  <button class="nav-link" onclick="showPage('mindset')">Mindset Map</button>
+  <button class="nav-link" onclick="showPage('watchlist')">Watchlist</button>
+  <button class="nav-link" onclick="showPage('progress')">Progress</button>
+  <button class="nav-link" onclick="showPage('essay')">GS4 Essays</button>
+  <button class="nav-link" onclick="showPage('guide')">How to Use</button>
+  <button class="theme-toggle" style="margin-top:8px" onclick="toggleTheme()">Toggle Theme</button>
+</div>
+
+<!-- ══════════════════════ HOME PAGE ══════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Future Civil Servant Training System</div>
+      <h1 class="hero-title">
+        Cinema as<br><em>Administrative</em><br>Intelligence
+      </h1>
+      <p class="hero-sub">
+        28 carefully curated films, documentaries & series — mapped to real IAS/IPS scenarios, ethical frameworks, and decision-making pressures. Not entertainment. A thinking system.
+      </p>
+      <div class="hero-stats">
+        <div><div class="hero-stat-n" id="heroFilmsCount">35</div><div class="hero-stat-l">Titles</div></div>
+        <div><div class="hero-stat-n">4</div><div class="hero-stat-l">Phases</div></div>
+        <div><div class="hero-stat-n">12</div><div class="hero-stat-l">Weeks</div></div>
+        <div><div class="hero-stat-n">4</div><div class="hero-stat-l">Archetypes</div></div>
+        <div><div class="hero-stat-n">12</div><div class="hero-stat-l">GS4 Essays</div></div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="showPage('films')">Browse All Films →</button>
+        <button class="btn-outline" onclick="showPage('plan')">See 12-Week Plan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase Strip -->
+  <div class="phase-strip">
+    <div class="phase-block p1" onclick="showPage('films'); filterFilms('phase1')">
+      <div class="phase-num">Phase 01 — Weeks 1–3</div>
+      <div class="phase-name">Ground Reality & State Failure</div>
+      <div class="phase-weeks">Foundation of administrative empathy</div>
+    </div>
+    <div class="phase-block p2" onclick="showPage('films'); filterFilms('phase2')">
+      <div class="phase-num">Phase 02 — Weeks 4–6</div>
+      <div class="phase-name">Power, Institutions & Reform</div>
+      <div class="phase-weeks">How systems resist change</div>
+    </div>
+    <div class="phase-block p3" onclick="showPage('films'); filterFilms('phase3')">
+      <div class="phase-num">Phase 03 — Weeks 7–9</div>
+      <div class="phase-name">Strategic Decision-Making</div>
+      <div class="phase-weeks">Crisis, pressure, uncertainty</div>
+    </div>
+    <div class="phase-block p4" onclick="showPage('films'); filterFilms('phase4')">
+      <div class="phase-num">Phase 04 — Weeks 10–12</div>
+      <div class="phase-name">Vision & Nation-Building</div>
+      <div class="phase-weeks">Legacy, long-game thinking</div>
+    </div>
+  </div>
+
+  <!-- Manifesto -->
+  <div class="ink-divider">
+    <div class="ink-divider-text" style="max-width:700px">
+      "The officer who has only read books knows what to think.<br>
+      The officer who has also felt stories knows <em>how</em> to think."
+    </div>
+  </div>
+
+    <!-- Quick intro -->
+  <div class="section fade-up">
+    <div class="section-label">What this system does</div>
+    <h2 class="section-title">Designed for the officer, not the aspirant</h2>
+    <p class="section-desc">Most UPSC resources teach you what to know. This system teaches you how to think — under pressure, with incomplete information, surrounded by corrupt incentives, with a constitutional obligation to act justly. That is what officers actually face.</p>
+    <div class="guide-grid" style="margin-top:32px">
+      <div class="guide-card fade-up">
+        <div class="guide-num">01</div>
+        <div class="guide-title">Each film is a scenario simulator</div>
+        <div class="guide-text">Every title is mapped to a real Indian administrative scenario — election duty, riot management, cooperative development, regulatory oversight. Watch it as that officer.</div>
+      </div>
+      <div class="guide-card fade-up">
+        <div class="guide-num">02</div>
+        <div class="guide-title">Mistakes are as important as lessons</div>
+        <div class="guide-text">Every entry flags the specific error characters make — and explains why smart, well-intentioned people make that exact mistake in real administrative life.</div>
+      </div>
+      <div class="guide-card fade-up">
+        <div class="guide-num">03</div>
+        <div class="guide-title">One mindset shift per film</div>
+        <div class="guide-text">Not "what did you learn." After each film you must be able to complete: "I used to think X. Now I think Y. This changes how I would handle Z." That is the standard.</div>
+      </div>
+      <div class="guide-card fade-up">
+        <div class="guide-num">04</div>
+        <div class="guide-title">Reflection questions force application</div>
+        <div class="guide-text">The 12-week plan has one written reflection question per week. Write it by hand. If you can't answer it in 200 words, rewatch. The reflection is the preparation, not the film.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress Banner -->
+  <div class="progress-banner">
+    <div class="progress-text">
+      <div id="overallProgressText">0/12 weeks completed</div>
+      <div class="progress-sub">Your 12-week journey awaits</div>
+    </div>
+    <div style="flex:1;max-width:400px;">
+      <div class="progress-bar-wrap" style="height:12px;background:rgba(255,255,255,0.1);border-radius:6px;overflow:hidden;">
+        <div class="progress-bar-fill" id="overallProgressBar" style="width:0%;height:100%;background:var(--gold);transition:width 0.5s;"></div>
+      </div>
+      <div style="text-align:right;margin-top:4px;font-family:'Space Mono',monospace;font-size:11px;color:var(--mist);">
+        <span id="overallProgressPercent">0</span>% Complete
+      </div>
+    </div>
+    <button class="btn-primary" onclick="showPage('plan')">Continue Journey →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ FILMS PAGE ══════════════════════ -->
+<div id="page-films" class="page">
+  <div class="section">
+    <div class="section-label">Complete Curriculum</div>
+    <h2 class="section-title">Films, Documentaries & Series<span class="filter-count" id="totalFilmCount"></span></h2>
+    <p class="section-desc">Each mapped to officer mindset, real scenarios, mistakes to avoid, and direct links.</p>
+
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input class="search-input" type="text" placeholder="Search films, themes, scenarios..." id="filmSearch" oninput="searchFilms(this.value)">
+    </div>
+
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" onclick="filterFilms('all', this)">All</button>
+      <button class="filter-btn" onclick="filterFilms('phase1', this)" style="border-color:var(--phase1);color:var(--phase1)" id="fb-phase1">Phase 1</button>
+      <button class="filter-btn" onclick="filterFilms('phase2', this)" style="border-color:var(--phase2);color:var(--phase2)" id="fb-phase2">Phase 2</button>
+      <button class="filter-btn" onclick="filterFilms('phase3', this)" style="border-color:var(--phase3);color:var(--phase3)" id="fb-phase3">Phase 3</button>
+      <button class="filter-btn" onclick="filterFilms('phase4', this)" style="border-color:var(--phase4);color:var(--phase4)" id="fb-phase4">Phase 4</button>
+      <span style="width:1px;background:var(--border);margin:0 8px;"></span>
+      <button class="filter-btn" onclick="filterFilms('film', this)">Film</button>
+      <button class="filter-btn" onclick="filterFilms('doc', this)">Doc</button>
+      <button class="filter-btn" onclick="filterFilms('series', this)">Series</button>
+      <button class="filter-btn" onclick="document.querySelector('.advanced-filters').classList.toggle('show')">+ Filters</button>
+    </div>
+
+    <div class="advanced-filters" id="advancedFilters">
+      <div class="filter-section">
+        <div class="filter-section-label">Mindset</div>
+        <button class="mindset-filter-btn active" onclick="filterByMindset('all', this)">All</button>
+        <button class="mindset-filter-btn" onclick="filterByMindset('executor', this)">Executor</button>
+        <button class="mindset-filter-btn" onclick="filterByMindset('reformer', this)">Reformer</button>
+        <button class="mindset-filter-btn" onclick="filterByMindset('leader', this)">Leader</button>
+        <button class="mindset-filter-btn" onclick="filterByMindset('visionary', this)">Visionary</button>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-label">GS Paper</div>
+        <button class="gs-filter-btn active" onclick="filterByGS('all', this)">All</button>
+        <button class="gs-filter-btn" onclick="filterByGS('GS1', this)">GS1</button>
+        <button class="gs-filter-btn" onclick="filterByGS('GS2', this)">GS2</button>
+        <button class="gs-filter-btn" onclick="filterByGS('GS3', this)">GS3</button>
+        <button class="gs-filter-btn" onclick="filterByGS('GS4', this)">GS4</button>
+        <button class="gs-filter-btn" onclick="filterByGS('Essay', this)">Essay</button>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-label">Sort By</div>
+        <button class="sort-btn active" onclick="sortFilms('default', this)">Default</button>
+        <button class="sort-btn" onclick="sortFilms('title', this)">Title A-Z</button>
+        <button class="sort-btn" onclick="sortFilms('year', this)">Year</button>
+      </div>
+    </div>
+
+    <div class="films-grid" id="filmsGrid"></div>
+    <div class="no-results" id="noResults">No films match your search. Try a different keyword.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════ PLAN PAGE ══════════════════════ -->
+<div id="page-plan" class="page">
+  <div class="section">
+    <div class="section-label">Structured Learning Path</div>
+    <h2 class="section-title">12-Week Officer Training Plan</h2>
+    <p class="section-desc">Each week has a theme, specific titles, a learning goal, and a written reflection question. The reflection is mandatory — not optional.</p>
+    <div class="week-timeline" id="weekTimeline"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ MINDSET PAGE ══════════════════════ -->
+<div id="page-mindset" class="page">
+  <div class="section">
+    <div class="section-label">Officer Archetypes</div>
+    <h2 class="section-title">The 4 Officer Mindsets</h2>
+    <p class="section-desc">Every great officer embodies a primary archetype and develops the other three. Know which one you naturally are — and which ones you must consciously build.</p>
+    <div class="archetype-grid" id="archetypeGrid"></div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="section-label">Critical Warnings</div>
+    <h2 class="section-title">6 Thinking Traps — Flagged by the Curriculum</h2>
+    <p class="section-desc">These are the specific cognitive and institutional traps that destroy good officers. Each one is shown in at least one film in this curriculum.</p>
+    <div class="trap-grid" id="trapGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ GUIDE PAGE ══════════════════════ -->
+<div id="page-guide" class="page">
+  <div class="section">
+    <div class="section-label">User Manual</div>
+    <h2 class="section-title">How to Use This System</h2>
+    <p class="section-desc">This is not a watchlist. It is a training protocol. The difference lies entirely in how you engage with each title.</p>
+
+    <div class="guide-grid">
+      <div class="guide-card">
+        <div class="guide-num">01</div>
+        <div class="guide-title">Before watching: Set the scenario</div>
+        <div class="guide-text">Read the "Real Scenario" for each film. Spend 5 minutes imagining you are actually in that position — what do you already know? What are your constraints? What would you do? Write 3 bullet points. Then watch.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">02</div>
+        <div class="guide-title">During: Pause at decision points</div>
+        <div class="guide-text">Every time a character faces a decision — especially under pressure — pause. Before watching what they do, ask: what would you do? Why? What information do you have? What are the consequences of each option?</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">03</div>
+        <div class="guide-title">After: The 3-line rule</div>
+        <div class="guide-text">Write exactly 3 lines after each film: (1) The core governance problem shown. (2) The mistake the protagonist made. (3) One specific thing you will do differently as an officer. No more, no less. Precision forces clarity.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">04</div>
+        <div class="guide-title">Weekly reflection — non-negotiable</div>
+        <div class="guide-text">Each week has one written reflection question. Handwrite it. 200–300 words minimum. If you can't answer it after watching, you watched as entertainment. Rewatch and watch as an officer.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">05</div>
+        <div class="guide-title">GS4 link — think in answer format</div>
+        <div class="guide-text">After every Ethics-tagged film, write one 150-word GS4 answer using that film's scenario as your real-world example. Do not cite the film — internalise the situation and cite it as "in administrative practice, an officer facing X..."</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">06</div>
+        <div class="guide-title">The final test: Week 12 manifesto</div>
+        <div class="guide-text">After Week 12, write your "Officer's Manifesto" — 5 principles by which you will govern. Not copied from anywhere. Drawn from what you have processed over 12 weeks. This is your actual UPSC preparation.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:48px; padding:32px; background:var(--ink); border-radius:0;">
+      <div class="section-label" style="color:var(--gold)">The honest truth about this system</div>
+      <p style="font-family:'Playfair Display',serif;font-size:22px;color:#fff;line-height:1.5;margin-top:12px;font-style:italic;">
+        "Watching Newton doesn't make you Newton. Writing about what you would have done differently — and why — might."
+      </p>
+      <p style="font-size:14px;color:var(--mist);margin-top:16px;line-height:1.7;">
+        The films are the trigger. The reflection is the work. Most aspirants use this system as a watchlist and wonder why their GS4 answers still sound generic. The ones who use it as a thinking laboratory — pausing, writing, questioning — find that their answers stop sounding like borrowed wisdom and start sounding like earned conviction. Examiners notice the difference.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ WATCHLIST PAGE ══════════════════════ -->
+<div id="page-watchlist" class="page">
+  <div class="section">
+    <div id="watchlistContent"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ PROGRESS PAGE ══════════════════════ -->
+<div id="page-progress" class="page">
+  <div class="section">
+    <div class="section-label">Your Journey</div>
+    <h2 class="section-title">Track Your Progress</h2>
+    <p class="section-desc">All your learning data is saved locally in your browser.</p>
+    <div id="progressContent"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ ESSAY PAGE ══════════════════════ -->
+<div id="page-essay" class="page">
+  <div class="section">
+    <div id="essayContent"></div>
+  </div>
+</div>
+
+<!-- NOTE MODAL -->
+<div class="note-modal" id="noteModal">
+  <div class="note-modal-inner">
+    <h3 class="note-modal-title" id="noteModalTitle">Notes</h3>
+    <textarea class="note-textarea" id="noteTextarea" placeholder="Write your notes here... Use this space to capture insights, key learnings, and personal reflections."></textarea>
+    <div class="note-modal-actions">
+      <button class="btn-outline" onclick="closeNoteModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveNoteFromModal()">Save Notes</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
